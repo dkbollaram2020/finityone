@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const app = express();
 
 // Body Parser Middleware
@@ -15,6 +18,6 @@ app.get("/", (req, res) => res.json({ message: "Hello World" }));
 // Trips api Routes
 app.use("/api/trips", require("./routes/api/trip_distance"));
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(process.env.PORT, () =>
+  console.log(`Server started on port ${process.env.PORT}`)
+);

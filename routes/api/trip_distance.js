@@ -23,7 +23,7 @@ router.post("/", (req, res) => {
   // Invoke Google API
   axios
     .get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${inputs.origin}&destinations=${inputs.destination}&key=AIzaSyCuubw5DUs69lnUrSw1QtZJW8wgTP-RqmE`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${inputs.origin}&destinations=${inputs.destination}&key=${process.env.GOOGLE_API_KEY}`
     )
     .then((response) => {
       return res.json({
@@ -93,7 +93,7 @@ router.get("/getTripDistances", (req, res) => {
           const trip = trip_data[index];
           try {
             const resp = await axios.get(
-              `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${trip.trip_origin_latitude},${trip.trip_origin_longitude}&destinations=${trip.trip_dest_latitude},${trip.trip_dest_longitude}&key=AIzaSyCuubw5DUs69lnUrSw1QtZJW8wgTP-RqmE`
+              `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${trip.trip_origin_latitude},${trip.trip_origin_longitude}&destinations=${trip.trip_dest_latitude},${trip.trip_dest_longitude}&key=${process.env.GOOGLE_API_KEY}`
             );
             if (resp.data.rows[0].elements[0].distance) {
               trip_distances.push({
