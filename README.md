@@ -14,7 +14,7 @@ Run the express & react dev server
 ```bash
 npm run dev
 ```
-Server runs on http://localhost:5000
+Server runs on http://localhost:5000 <br/>
 Client runs on http://localhost:3000
 
 ## App Info
