@@ -48,7 +48,7 @@ const ModelPopUp = () => {
                   // Make a GET request
                   axios({
                     method: "get",
-                    url: `${process.env.REACT_APP_PROXY}`,
+                    url: `${process.env.REACT_APP_PROXY}api`,
                   }).then((response) => {
                     setLoading(false);
 
