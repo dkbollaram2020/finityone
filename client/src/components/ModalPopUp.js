@@ -1,18 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Container,
-  Row,
-  Col,
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import axios from "axios";
 
 import Loader from "./Loader";
@@ -27,19 +14,17 @@ const ModelPopUp = () => {
   if (loading) return <Loader />;
 
   return (
-    <Container>
-      <Row>
-        <Col xs="6">
-          <Card>
-            <CardBody>
-              <CardTitle>
-                <strong>GET a 'Hello World' message</strong>
-              </CardTitle>
-              <CardSubtitle>url: /</CardSubtitle>
-              <CardText>
+    <div className="container">
+      <div className="row">
+        <div className="col mb-4">
+          <div className="card" style={{ width: "32rem" }}>
+            <div className="card-body">
+              <h5 className="card-title mb-3">GET a 'Hello World' message</h5>
+              <h6 className="card-subtitle mb-3 text-muted">url: /api </h6>
+              <p className="card-text">
                 GET request that responds with a 'Hello World' message
-              </CardText>
-              {/* GET / */}
+              </p>
+
               <Button
                 color="secondary"
                 onClick={() => {
@@ -60,24 +45,26 @@ const ModelPopUp = () => {
               >
                 Get a message
               </Button>
-            </CardBody>
-          </Card>{" "}
-        </Col>
-        <Col xs="6">
-          <Card>
-            <CardBody>
-              <CardTitle>
-                <strong>
-                  POST request to get distance between two locations using
-                  Google Map API
-                </strong>
-              </CardTitle>
-              <CardSubtitle>url: /api/trips </CardSubtitle>
-              <CardText>
+            </div>
+          </div>
+        </div>
+
+        <div className="col">
+          <div className="card mb-4" style={{ width: "32rem" }}>
+            <div className="card-body">
+              <h5 className="card-title mb-3">
+                POST request to get distance between two locations using Google
+                Map API
+              </h5>
+              <h6 className="card-subtitle mb-3 text-muted">
+                url: /api/trips{" "}
+              </h6>
+
+              <p className="card-text">
                 POST request that takes in a trip coordinates and responds with
                 the number of miles between the 2 locations.
-              </CardText>
-              {/* POST /api/trips*/}
+              </p>
+
               <Button
                 color="secondary"
                 onClick={() => {
@@ -103,29 +90,29 @@ const ModelPopUp = () => {
               >
                 Get distance
               </Button>
-            </CardBody>
-          </Card>{" "}
-        </Col>
-      </Row>
+            </div>
+          </div>
+        </div>
 
-      <Row>
-        <Col xs="6">
-          <Card>
-            <CardBody>
-              <CardTitle>
-                <strong>
-                  GET request to return a list of people on a trip with more
-                  than $25,000 expense
-                </strong>
-              </CardTitle>
-              <CardSubtitle>url: /api/trips/getListOfPeople </CardSubtitle>
-              <CardText>
+        <div className="w-100"></div>
+
+        <div className="col">
+          <div className="card" style={{ width: "32rem" }}>
+            <div className="card-body">
+              <h5 className="card-title mb-3">
+                GET request to return a list of people on a trip with more than
+                $25,000 expense
+              </h5>
+              <h6 className="card-subtitle mb-3 text-muted">
+                url: /api/trips/getListOfPeople{" "}
+              </h6>
+
+              <p className="card-text">
                 A GET request to return a list of people with the first name,
                 last name, and email address of those contacts that have been on
                 a trip with more than $25,000 expense amount. <br />
                 *Using in-memory data
-              </CardText>
-              {/* GET /api/trips/getListOfPeople */}
+              </p>
               <Button
                 color="secondary"
                 onClick={() => {
@@ -142,26 +129,26 @@ const ModelPopUp = () => {
               >
                 Get list of people
               </Button>
-            </CardBody>
-          </Card>{" "}
-        </Col>
-        <Col xs="6">
-          <Card>
-            <CardBody>
-              <CardTitle>
-                <strong>
-                  GET request to return a list of trip distances using Google
-                  Map API
-                </strong>
-              </CardTitle>
-              <CardSubtitle>url: /api/trips/getTripDistances </CardSubtitle>
-              <CardText>
+            </div>
+          </div>
+        </div>
+
+        <div className="col">
+          <div className="card" style={{ width: "32rem" }}>
+            <div className="card-body">
+              <h5 className="card-title mb-3">
+                GET request to return a list of trip distances using Google Map
+                API
+              </h5>
+              <h6 className="card-subtitle mb-3 text-muted">
+                url: /api/trips/getTripDistances{" "}
+              </h6>
+
+              <p className="card-text">
                 A GET request to return a list of distances between the origin
                 and destinations within the trip_data using the API developed
                 earlier.
-              </CardText>{" "}
-              {/* GET /api/trips/getTripDistances */}
-              {/* <Spinner type="grow" color="dark" /> */}
+              </p>
               <Button
                 color="secondary"
                 onClick={() => {
@@ -180,10 +167,10 @@ const ModelPopUp = () => {
               >
                 Get trip distances
               </Button>
-            </CardBody>
-          </Card>{" "}
-        </Col>
-      </Row>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Modal isOpen={modal} toggle={handleToggle}>
         <ModalHeader toggle={handleToggle}>Response</ModalHeader>
@@ -191,7 +178,7 @@ const ModelPopUp = () => {
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </ModalBody>
       </Modal>
-    </Container>
+    </div>
   );
 };
 
