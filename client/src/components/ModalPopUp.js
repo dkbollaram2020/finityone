@@ -29,11 +29,12 @@ const ModelPopUp = () => {
                 color="secondary"
                 onClick={() => {
                   setLoading(true);
+                  console.log("REACT_APP_PROXY", process.env.REACT_APP_PROXY);
 
                   // Make a GET request
                   axios({
                     method: "get",
-                    url: `${process.env.REACT_APP_PROXY}`,
+                    url: process.env.REACT_APP_PROXY + "api",
                   }).then((response) => {
                     setLoading(false);
 
@@ -78,7 +79,7 @@ const ModelPopUp = () => {
                   };
 
                   axios
-                    .post(`${process.env.REACT_APP_PROXY}api/trips`, data, {
+                    .post(process.env.REACT_APP_PROXY + "api/trips", data, {
                       headers: headers,
                     })
                     .then((res) => {
@@ -119,7 +120,8 @@ const ModelPopUp = () => {
                   // Make a GET request
                   axios({
                     method: "get",
-                    url: `${process.env.REACT_APP_PROXY}api/trips/getListOfPeople`,
+                    url:
+                      process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
                   }).then((response) => {
                     setData(response.data);
                     // Show Modal with response data
@@ -156,7 +158,9 @@ const ModelPopUp = () => {
                   // Make a GET request
                   axios({
                     method: "get",
-                    url: `${process.env.REACT_APP_PROXY}api/trips/getTripDistances`,
+                    url:
+                      process.env.REACT_APP_PROXY +
+                      "api/trips/getTripDistances",
                   }).then((response) => {
                     setLoading(false);
                     setData(response.data);
