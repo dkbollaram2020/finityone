@@ -1,5 +1,5 @@
 .center {
-  margin: auto;
+  /* margin: auto;
   width: 50%;
   max-width: 400px;
   min-width: 150px;
@@ -7,5 +7,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 20px;
+  font-size: 20px; */
+  display: block;
+  position: fixed;
+  z-index: 1031; /* High z-index so it is on top of the page */
+  top: 50%;
+  right: 50%; /* or: left: 50%; */
 }
