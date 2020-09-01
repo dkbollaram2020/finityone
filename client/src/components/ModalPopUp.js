@@ -44,6 +44,7 @@ const ModelPopUp = () => {
                 color="secondary"
                 onClick={() => {
                   setLoading(true);
+                  console.log("REACT_APP_PROXY", process.env.REACT_APP_PROXY)
 
                   // Make a GET request
                   axios({
