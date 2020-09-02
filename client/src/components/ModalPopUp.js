@@ -6,12 +6,26 @@ import Loader from "./Loader";
 
 const ModelPopUp = () => {
   const [modal, setModal] = useState(false);
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
   const handleToggle = () => setModal(!modal);
 
   if (loading) return <Loader />;
+
+  const onChangeOrigin = (event) => {
+    setOrigin(event.target.value);
+  };
+
+  const onChangeDesitnation = (event) => {
+    setDestination(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div className="container">
@@ -67,31 +81,58 @@ const ModelPopUp = () => {
                 the number of miles between the 2 locations.
               </p>
 
-              <Button
-                color="secondary"
-                onClick={() => {
-                  // Make a POST request
-                  const data = {
-                    origin: "51.532428, -0.641104",
-                    destination: "51.555817, -0.146970",
-                  };
-                  const headers = {
-                    "Content-Type": "application/json",
-                  };
+              <form>
+                <label>
+                  Origin coordinates:
+                  <input
+                    type="text"
+                    className="ml-3"
+                    placeholder="51.546187, -0.104757"
+                    value={origin}
+                    onChange={(event) => setOrigin(event.target.value)}
+                  />
+                </label>
 
-                  axios
-                    .post(process.env.REACT_APP_PROXY + "api/trips", data, {
-                      headers: headers,
-                    })
-                    .then((res) => {
-                      setData(res.data);
-                      // Show Modal with response data
-                      setModal(!modal);
-                    });
-                }}
-              >
-                Get distance
-              </Button>
+                <label>
+                  Destination coordinates:
+                  <input
+                    type="text"
+                    className="ml-3"
+                    placeholder="51.517498, -0.153860"
+                    value={destination}
+                    onChange={(event) => setDestination(event.target.value)}
+                  />
+                </label>
+                <br />
+
+                {/* <input type="submit" value="Submit" /> */}
+                <Button
+                  color="secondary"
+                  disabled={!origin || !destination}
+                  onClick={() => {
+                    // Make a POST request
+                    const data = {
+                      origin,
+                      destination,
+                    };
+                    const headers = {
+                      "Content-Type": "application/json",
+                    };
+
+                    axios
+                      .post(process.env.REACT_APP_PROXY + "api/trips", data, {
+                        headers: headers,
+                      })
+                      .then((res) => {
+                        setData(res.data);
+                        // Show Modal with response data
+                        setModal(!modal);
+                      });
+                  }}
+                >
+                  Get distance
+                </Button>
+              </form>
             </div>
           </div>
         </div>
@@ -118,12 +159,14 @@ const ModelPopUp = () => {
               <Button
                 color="secondary"
                 onClick={() => {
+                  setLoading(true);
                   // Make a GET request
                   axios({
                     method: "get",
                     url:
                       process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
                   }).then((response) => {
+                    setLoading(false);
                     setData(response.data);
                     // Show Modal with response data
                     setModal(!modal);
