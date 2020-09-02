@@ -13,6 +13,71 @@ const ModelPopUp = () => {
 
   const handleToggle = () => setModal(!modal);
 
+  const onClickPostButton = () => {
+    const data = {
+      origin,
+      destination,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .post(process.env.REACT_APP_PROXY + "api/trips", data, {
+        headers: headers,
+      })
+      .then((res) => {
+        setData(res.data);
+        // Show Modal with response data
+        setModal(!modal);
+      });
+  };
+
+  const onClickGETMessage = () => {
+    setLoading(true);
+
+    // Make a GET request
+    axios({
+      method: "get",
+      url: process.env.REACT_APP_PROXY + "api",
+    }).then((response) => {
+      setLoading(false);
+
+      setData(response.data);
+      // Show Modal with response data
+      setModal(!modal);
+    });
+  };
+
+  const onClickGETListOfPeople = () => {
+    setLoading(true);
+    // Make a GET request
+    axios({
+      method: "get",
+      url: process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
+    }).then((response) => {
+      setLoading(false);
+      setData(response.data);
+      // Show Modal with response data
+      setModal(!modal);
+    });
+  };
+
+  const onClickGetListOfTripDistances = () => {
+    setLoading(true);
+    // Make a GET request
+    axios({
+      method: "get",
+
+      url: process.env.REACT_APP_PROXY + "api/trips/getTripDistances",
+    }).then((response) => {
+      setLoading(false);
+      setData(response.data);
+      // Show Modal with response data
+      setModal(!modal);
+    });
+  };
+
   if (loading) return <Loader />;
 
   const onChangeOrigin = (event) => {
@@ -39,26 +104,7 @@ const ModelPopUp = () => {
                 GET request that responds with a 'Hello World' message
               </p>
 
-              <Button
-                color="secondary"
-                onClick={() => {
-                  setLoading(true);
-
-                  //automatic deploy to heroku on git push
-
-                  // Make a GET request
-                  axios({
-                    method: "get",
-                    url: process.env.REACT_APP_PROXY + "api",
-                  }).then((response) => {
-                    setLoading(false);
-
-                    setData(response.data);
-                    // Show Modal with response data
-                    setModal(!modal);
-                  });
-                }}
-              >
+              <Button color="secondary" onClick={(_) => onClickGETMessage()}>
                 Get a message
               </Button>
             </div>
@@ -104,31 +150,10 @@ const ModelPopUp = () => {
                   />
                 </label>
                 <br />
-
-                {/* <input type="submit" value="Submit" /> */}
                 <Button
                   color="secondary"
                   disabled={!origin || !destination}
-                  onClick={() => {
-                    // Make a POST request
-                    const data = {
-                      origin,
-                      destination,
-                    };
-                    const headers = {
-                      "Content-Type": "application/json",
-                    };
-
-                    axios
-                      .post(process.env.REACT_APP_PROXY + "api/trips", data, {
-                        headers: headers,
-                      })
-                      .then((res) => {
-                        setData(res.data);
-                        // Show Modal with response data
-                        setModal(!modal);
-                      });
-                  }}
+                  onClick={(_) => onClickPostButton()}
                 >
                   Get distance
                 </Button>
@@ -158,20 +183,7 @@ const ModelPopUp = () => {
               </p>
               <Button
                 color="secondary"
-                onClick={() => {
-                  setLoading(true);
-                  // Make a GET request
-                  axios({
-                    method: "get",
-                    url:
-                      process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
-                  }).then((response) => {
-                    setLoading(false);
-                    setData(response.data);
-                    // Show Modal with response data
-                    setModal(!modal);
-                  });
-                }}
+                onClick={(_) => onClickGETListOfPeople()}
               >
                 Get list of people
               </Button>
@@ -197,22 +209,7 @@ const ModelPopUp = () => {
               </p>
               <Button
                 color="secondary"
-                onClick={() => {
-                  setLoading(true);
-                  // Make a GET request
-                  axios({
-                    method: "get",
-
-                    url:
-                      process.env.REACT_APP_PROXY +
-                      "api/trips/getTripDistances",
-                  }).then((response) => {
-                    setLoading(false);
-                    setData(response.data);
-                    // Show Modal with response data
-                    setModal(!modal);
-                  });
-                }}
+                onClick={(_) => onClickGetListOfTripDistances()}
               >
                 Get trip distances
               </Button>
