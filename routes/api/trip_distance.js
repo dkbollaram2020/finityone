@@ -9,6 +9,7 @@ const csv = require("fast-csv");
 // @desc     Return number of miles between the 2 locations
 // @access   Public
 router.post("/", (req, res) => {
+  let distance = "";
   // get origin and destination inputs
   const inputs = {
     ...req.body,
@@ -26,13 +27,17 @@ router.post("/", (req, res) => {
       `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${inputs.origin}&destinations=${inputs.destination}&key=${process.env.GOOGLE_API_KEY}`
     )
     .then((response) => {
+      try {
+        distance = response.data.rows[0].elements[0].distance.text;
+      } catch (err) {
+        return res.status(500).json({ msg: "distance NOT_FOUND in Response" });
+      }
       return res.json({
-        distance: response.data.rows[0].elements[0].distance.text,
+        distance: distance,
       });
     })
     .catch((error) => {
-      console.log(error);
-      res.status(500).json({ msg: "Server error occurred" });
+      res.status(500).json({ msg: "Could not get response" });
     });
 });
 
@@ -48,8 +53,7 @@ router.get("/getListOfPeople", (req, res) => {
   fs.createReadStream(path.resolve(__dirname, "assets", "contacts.csv"))
     .pipe(csv.parse({ headers: true }))
     .on("error", (error) => console.error(error))
-    .on("data", (row) => contacts.push(row))
-    .on("end", (rowCount) => console.log(`Parsed ${rowCount} rows`));
+    .on("data", (row) => contacts.push(row));
 
   // read the trip data from local csv files
   fs.createReadStream(path.resolve(__dirname, "assets", "trip_data.csv"))

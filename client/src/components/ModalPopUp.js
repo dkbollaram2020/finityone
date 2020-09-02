@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Loader from "./Loader";
+
+//configure toastify
+toast.configure();
 
 const ModelPopUp = () => {
   const [modal, setModal] = useState(false);
@@ -30,6 +35,11 @@ const ModelPopUp = () => {
         setData(res.data);
         // Show Modal with response data
         setModal(!modal);
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
   };
 
@@ -40,13 +50,19 @@ const ModelPopUp = () => {
     axios({
       method: "get",
       url: process.env.REACT_APP_PROXY + "api",
-    }).then((response) => {
-      setLoading(false);
+    })
+      .then((response) => {
+        setLoading(false);
 
-      setData(response.data);
-      // Show Modal with response data
-      setModal(!modal);
-    });
+        setData(response.data);
+        // Show Modal with response data
+        setModal(!modal);
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
 
   const onClickGETListOfPeople = () => {
@@ -55,12 +71,18 @@ const ModelPopUp = () => {
     axios({
       method: "get",
       url: process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
-    }).then((response) => {
-      setLoading(false);
-      setData(response.data);
-      // Show Modal with response data
-      setModal(!modal);
-    });
+    })
+      .then((response) => {
+        setLoading(false);
+        setData(response.data);
+        // Show Modal with response data
+        setModal(!modal);
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
 
   const onClickGetListOfTripDistances = () => {
@@ -70,12 +92,18 @@ const ModelPopUp = () => {
       method: "get",
 
       url: process.env.REACT_APP_PROXY + "api/trips/getTripDistances",
-    }).then((response) => {
-      setLoading(false);
-      setData(response.data);
-      // Show Modal with response data
-      setModal(!modal);
-    });
+    })
+      .then((response) => {
+        setLoading(false);
+        setData(response.data);
+        // Show Modal with response data
+        setModal(!modal);
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
 
   if (loading) return <Loader />;
