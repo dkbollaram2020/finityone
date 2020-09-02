@@ -19,6 +19,7 @@ const ModelPopUp = () => {
   const handleToggle = () => setModal(!modal);
 
   const onClickPostButton = () => {
+    setLoading(true);
     const data = {
       origin,
       destination,
@@ -32,11 +33,13 @@ const ModelPopUp = () => {
         headers: headers,
       })
       .then((res) => {
+        setLoading(false);
         setData(res.data);
         // Show Modal with response data
         setModal(!modal);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -59,6 +62,7 @@ const ModelPopUp = () => {
         setModal(!modal);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -79,6 +83,7 @@ const ModelPopUp = () => {
         setModal(!modal);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -100,6 +105,7 @@ const ModelPopUp = () => {
         setModal(!modal);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -108,23 +114,11 @@ const ModelPopUp = () => {
 
   if (loading) return <Loader />;
 
-  const onChangeOrigin = (event) => {
-    setOrigin(event.target.value);
-  };
-
-  const onChangeDesitnation = (event) => {
-    setDestination(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <div className="container">
-      <div className="row">
-        <div className="col mb-4">
-          <div className="card" style={{ width: "32rem" }}>
+      <div className="row mt-5">
+        <div className="col mb-4 mt-5">
+          <div className="card" style={{ width: "26rem" }}>
             <div className="card-body">
               <h5 className="card-title mb-3">GET a 'Hello World' message</h5>
               <h6 className="card-subtitle mb-3 text-muted">url: /api </h6>
@@ -139,8 +133,8 @@ const ModelPopUp = () => {
           </div>
         </div>
 
-        <div className="col">
-          <div className="card mb-4" style={{ width: "32rem" }}>
+        <div className="col mt-5">
+          <div className="card mb-4" style={{ width: "26rem" }}>
             <div className="card-body">
               <h5 className="card-title mb-3">
                 POST request to get distance between two locations using Google
@@ -192,8 +186,8 @@ const ModelPopUp = () => {
 
         <div className="w-100"></div>
 
-        <div className="col">
-          <div className="card" style={{ width: "32rem" }}>
+        <div className="col mb-4">
+          <div className="card" style={{ width: "26rem" }}>
             <div className="card-body">
               <h5 className="card-title mb-3">
                 GET request to return a list of people on a trip with more than
@@ -219,8 +213,8 @@ const ModelPopUp = () => {
           </div>
         </div>
 
-        <div className="col">
-          <div className="card" style={{ width: "32rem" }}>
+        <div className="col mb-4">
+          <div className="card" style={{ width: "26rem" }}>
             <div className="card-body">
               <h5 className="card-title mb-3">
                 GET request to return a list of trip distances using Google Map
