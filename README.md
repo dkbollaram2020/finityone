@@ -1,5 +1,5 @@
 # finityone
-A simple react node.js express full stack app 
+A simple node.js express server with CI/CD setup using Github actions and Heroku
 
 ## Quick Start
 Replace your GOOGLE_API_KEY in the .env file.
