@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.1.21",
     "react-scripts": "3.4.3",
     "react-toastify": "^6.0.8",
     "reactstrap": "^8.5.1"

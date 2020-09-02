@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import NavLink from "reactstrap/lib/NavLink";
 
-const AppNavbar = () => {
+const AppNavbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => setIsOpen(!isOpen);
@@ -23,11 +23,12 @@ const AppNavbar = () => {
           <NavbarToggler onClick={handleToggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              <NavItem className="mr-3">
                 <NavLink href="https://github.com/dkbollaram2020/finityone">
                   GitHub
                 </NavLink>
               </NavItem>
+              <NavItem>{props.children}</NavItem>
             </Nav>
           </Collapse>
         </Container>
