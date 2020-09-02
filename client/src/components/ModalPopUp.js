@@ -30,6 +30,7 @@ const ModelPopUp = () => {
                 onClick={() => {
                   setLoading(true);
 
+                  //automatic deploy to heroku on git push
 
                   // Make a GET request
                   axios({
@@ -120,8 +121,8 @@ const ModelPopUp = () => {
                   // Make a GET request
                   axios({
                     method: "get",
-                    url: process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
-
+                    url:
+                      process.env.REACT_APP_PROXY + "api/trips/getListOfPeople",
                   }).then((response) => {
                     setData(response.data);
                     // Show Modal with response data
@@ -159,8 +160,9 @@ const ModelPopUp = () => {
                   axios({
                     method: "get",
 
-                    url: process.env.REACT_APP_PROXY + "api/trips/getTripDistances",
-
+                    url:
+                      process.env.REACT_APP_PROXY +
+                      "api/trips/getTripDistances",
                   }).then((response) => {
                     setLoading(false);
                     setData(response.data);
