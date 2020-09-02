@@ -1,5 +1,5 @@
 # finityone
-A simple node.js express server with CI/CD setup using Github actions and Heroku
+A simple full-stack web app built with React on the client, Node.js Express server on the back-end with CI/CD setup using Github actions and Heroku
 
 ## Quick Start
 Replace your GOOGLE_API_KEY in the .env file.
